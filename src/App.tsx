@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as Redux from 'redux';
 
-import {Reducers} from './redux/Reducers';
-import {State} from './redux/State';
+import {State} from './store/State';
 
 import {MessageView} from './components/MessageView';
 import {MessageInput} from './components/MessageInput';
