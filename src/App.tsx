@@ -1,27 +1,17 @@
 import * as React from 'react';
-import * as Redux from 'redux';
 
-import {State} from './store/State';
-
+import {MessagesActions} from './actions/MessagesActions';
 import {MessageView} from './components/MessageView';
 import {MessageInput} from './components/MessageInput';
+import {State} from './store/State';
 
-class App extends React.Component<null, null> {
-
-    store: Redux.Store<State>;
-
-    componentDidMount = () => {
-        this.store.subscribe(() => this.forceUpdate());
-    };
+class App extends React.Component<{}, {} > {
 
     constructor() {
         super();
-        const initialState = new State();
-        this.store = Redux.createStore(Reducers.reducer, initialState);
     }
 
     render() {
-        const state: State = this.store.getState();
 
         return (
             <div>
@@ -36,3 +26,4 @@ class App extends React.Component<null, null> {
 }
 
 export default App;
+

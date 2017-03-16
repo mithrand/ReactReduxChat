@@ -3,9 +3,9 @@
  */
 
 import { combineReducers } from 'redux';
-import MessageReducer from './MessageReducer';
+import messages from './Messages';
 
 export default combineReducers({
-    messages: MessageReducer
+    messages
 })
 
