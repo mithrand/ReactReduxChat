@@ -7,6 +7,7 @@ import {Message} from '../model/Message';
 
 export interface MessageViewProps {
     messages: Message[];
+    onClick?(id: string): void;
 }
 
 export class MessageView extends React.Component<MessageViewProps, {}> {
@@ -16,8 +17,21 @@ export class MessageView extends React.Component<MessageViewProps, {}> {
         this.props = props;
     }
 
+    onClickHandler = (event: React.FormEvent<HTMLLIElement>): void => {
+        let id  = event.currentTarget.getAttribute('data-id');
+        if (this.props.onClick && id) {
+            this.props.onClick(id);
+        }
+    };
+
     render() {
-        let messages = this.props.messages.map(m => <li className="list-group-item" key={m.id}>m.text</li>);
+        let messages = this.props.messages
+            .map((m: Message) =>
+                (
+                    <li key={m.id} data-id={m.id} className="list-group-item" onClick={this.onClickHandler}>
+                        {m.text}
+                    </li>
+                ));
         return(
             <div className="jumbotron">
                 <ul className="list-group">

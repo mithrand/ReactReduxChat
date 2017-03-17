@@ -20,6 +20,11 @@ class App extends React.Component<{}, {} > {
         store.dispatch(action);
     };
 
+    onClick = (id: string): void => {
+        let action = MessagesActions.DEL_MESSAGE(id);
+        store.dispatch(action);
+    };
+
     render() {
         const messages = store.getState().messageReducer.messages;
         return (
@@ -27,7 +32,7 @@ class App extends React.Component<{}, {} > {
                 <div className="page-header">
                     <h1>MessageChat</h1>
                 </div>
-                <MessageView messages={messages} />
+                <MessageView messages={messages} onClick={this.onClick} />
                 <MessageInput name="text" onSubmit={this.onFormSubmit} />
             </div>
         );

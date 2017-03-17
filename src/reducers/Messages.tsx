@@ -42,7 +42,7 @@ export default function messages (state: State = defaultState, action: Action): 
             break;
         case ActionType.ADD_MESSAGE:
             message = {
-                id: UID.create() ,
+                id: UID.create().hex ,
                 text: action.payload.text,
                 user: 'pepe',
                 timeSpam: moment()

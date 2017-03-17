@@ -37,6 +37,7 @@ export class MessageInput extends React.Component<MessageInputProps , {}> {
         event.preventDefault();
         if ( this.state.text !== '') {
             this.props.onSubmit(this.state);
+            this.setState(this.getDefaultState())
         }
     };
 
@@ -45,7 +46,14 @@ export class MessageInput extends React.Component<MessageInputProps , {}> {
             <form onSubmit={this.onFormSubmitHandler} >
                 <div className="form-group">
                     <label htmlFor="message">Message:</label>
-                    <input name="text" type="text" className="form-control" placeholder="Message"/>
+                    <input
+                        name="text"
+                        type="text"
+                        className="form-control"
+                        placeholder="Message"
+                        onChange={this.onChangeHandler}
+                        value={this.state.text}
+                    />
                 </div>
                 <button type="submit" className="btn btn-default">Send</button>
             </form>
