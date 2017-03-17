@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {MessagesActions} from './actions/MessagesActions';
 import {MessageView} from './components/MessageView';
-import {MessageInput} from './components/MessageInput';
+import {MessageInput, FormState} from './components/MessageInput';
 import {store} from './store/Store';
 
 class App extends React.Component<{}, {} > {
@@ -15,13 +15,13 @@ class App extends React.Component<{}, {} > {
         super();
     }
 
-    onFormSubmit = (text: string) => {
-        let action = MessagesActions.ADD_MESSAGE(text);
+    onFormSubmit = (form: FormState) => {
+        let action = MessagesActions.ADD_MESSAGE(form.text);
         store.dispatch(action);
     };
 
     render() {
-        const messages = store.getState().messages;
+        const messages = store.getState().messageReducer.messages;
         return (
             <div>
                 <div className="page-header">
@@ -35,4 +35,3 @@ class App extends React.Component<{}, {} > {
 }
 
 export default App;
-
