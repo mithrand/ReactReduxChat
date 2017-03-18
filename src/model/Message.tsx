@@ -9,4 +9,4 @@ export interface Message {
     user: string;
     timeSpam: moment.Moment;
 }
-
+export default Message;

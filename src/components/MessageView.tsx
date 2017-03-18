@@ -29,7 +29,7 @@ export class MessageView extends React.Component<MessageViewProps, {}> {
             .map((m: Message) =>
                 (
                     <li key={m.id} data-id={m.id} className="list-group-item" onClick={this.onClickHandler}>
-                        {m.text}
+                        <h5><small>{m.timeSpam.format('HH:mm:ss')}</small> {m.text}</h5>
                     </li>
                 ));
         return(
