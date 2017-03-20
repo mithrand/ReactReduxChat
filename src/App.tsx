@@ -4,6 +4,7 @@ import {MessagesActions} from './actions/MessagesActions';
 import {conversationsActions} from './actions/ConversationsActions';
 import {MessageView} from './components/MessageView';
 import {MessageInput, FormState} from './components/MessageInput';
+import {ConversationInput, ConversationInputState} from './components/ConversationInput';
 import {ConversationsTabs} from './components/ConversationsTabs';
 import {Message} from './model/Message';
 
@@ -27,6 +28,11 @@ class App extends React.Component<{}, {} > {
 
     delMessage = (id: string): void => {
         let action = MessagesActions.DEL_MESSAGE(id);
+        store.dispatch(action);
+    };
+
+    createConversation = (form: ConversationInputState) => {
+        let action = conversationsActions.ADD_CONVERSATION(form.title);
         store.dispatch(action);
     };
 
@@ -56,6 +62,7 @@ class App extends React.Component<{}, {} > {
                 </div>
                 <MessageView messages={messages} onClick={this.delMessage} />
                 <MessageInput name="text" onSubmit={this.onFormSubmit} />
+                <ConversationInput onSubmit={this.createConversation} />
             </div>
         );
     }

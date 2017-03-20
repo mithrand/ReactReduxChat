@@ -25,7 +25,7 @@ export default function messages (state: State = defaultState(), action: Action)
     let messages: Message[] = [];
     let newState: State;
     let conversations: Conversation[];
-    let result: State = state;
+    let result = state;
 
     switch (action.type) {
         case ActionType.ADD_MESSAGE:

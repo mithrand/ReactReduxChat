@@ -31,9 +31,11 @@ export class ConversationsTabs extends React.Component<ConversationInputProps , 
 
         let conversations = this.props.conversations.map(x => {
             let styles = x.id === this.props.selectedConversation ? 'active' : '';
-            return <li key={x.id} data-id={x.id} role="presentation" className={styles}>
-                <a href="#">{x.title}</a>
-            </li>
+            return(
+                <li key={x.id} data-id={x.id} role="presentation" className={styles} onClick={this.onClickHander}>
+                    <a href="#">{x.title}</a>
+                </li>
+            );
         });
 
         return (
