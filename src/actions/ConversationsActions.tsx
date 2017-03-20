@@ -9,7 +9,7 @@ import axios, {AxiosResponse} from 'axios';
 import {Action} from './Action';
 
 // tslint:disable-next-line
-export class MessagesActions {
+export class conversationsActions {
 
   public static ADD_CONVERSATION = (title: string): Action => {
     return {type: ActionType.ADD_CONVERSATION, payload: {title: title}} ;
@@ -21,6 +21,10 @@ export class MessagesActions {
 
   public static UPDATE_CONVERSATION = (id: string, title: string): Action => {
     return {type: ActionType.UPDATE_CONVERSATION, payload: {id: id , title: title}} ;
+  };
+
+  public static SELECT_CONVERSATION = (id: string): Action => {
+    return {type: ActionType.SELECT_CONVERSATION, payload: {id: id}} ;
   };
 
   public static FETCH_CONVERSATION = () => {
@@ -42,9 +46,10 @@ export class ActionType {
   public static ADD_CONVERSATION = 'ADD_CONVERSATION';
   public static DEL_CONVERSATION = 'DEL_CONVERSATION';
   public static UPDATE_CONVERSATION = 'UPDATE_CONVERSATION';
+  public static SELECT_CONVERSATION = 'SELECT_CONVERSATION';
   public static FETCH_CONVERSATION = 'FETCH_CONVERSATION';
   public static FETCH_CONVERSATION_FULFILLED = 'FETCH_CONVERSATION_FULFILLED';
   public static FETCH_CONVERSATION_REJECTED = 'FETCH_CONVERSATION_REJECTED';
 }
 
-export default MessagesActions;
+export default conversationsActions;

@@ -4,7 +4,9 @@
 
 import { combineReducers } from 'redux';
 import messages from './Messages';
+import conversations from './Conversations';
 
 export default combineReducers({
-    messageReducer: messages
-})
+    messageReducer: messages,
+    conversationsReducer: conversations
+});

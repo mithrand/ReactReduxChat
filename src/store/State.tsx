@@ -9,6 +9,7 @@ export interface State {
     fetching: boolean,
     fetched: boolean,
     error: Error | null,
+    selectedConversation: string;
 }
 
 export function defaultState() {
@@ -17,6 +18,7 @@ export function defaultState() {
         fetching: false,
         fetched: false,
         error: null,
+        selectedConversation: ''
     };
 }
 
