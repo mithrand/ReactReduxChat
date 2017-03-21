@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {MessagesActions} from './actions/MessagesActions';
 import {conversationsActions} from './actions/ConversationsActions';
+import {selectConversationActions} from './actions/SelectedConversationActions';
 import {MessageView} from './components/MessageView';
 import {MessageInput, FormState} from './components/MessageInput';
 import {ConversationInput, ConversationInputState} from './components/ConversationInput';
@@ -22,12 +22,14 @@ class App extends React.Component<{}, {} > {
     }
 
     onFormSubmit = (form: FormState) => {
-        let action = MessagesActions.ADD_MESSAGE(form.text);
+        const state = store.getState();
+        let action = conversationsActions.ADD_MESSAGE(form.text, state.selectedConversation);
         store.dispatch(action);
     };
 
     delMessage = (id: string): void => {
-        let action = MessagesActions.DEL_MESSAGE(id);
+        const state = store.getState();
+        let action = conversationsActions.DEL_MESSAGE(id, state.selectedConversation);
         store.dispatch(action);
     };
 
@@ -37,12 +39,12 @@ class App extends React.Component<{}, {} > {
     };
 
     selectConversation = (id: string): void => {
-        let action = conversationsActions.SELECT_CONVERSATION(id);
+        let action = selectConversationActions.SELECT_CONVERSATION(id);
         store.dispatch(action);
     };
 
     render() {
-        const state: State = store.getState().conversationsReducer;
+        const state: State = store.getState();
         let messages: Message[] = [];
         const conversation = state.conversations
             .find(x => x.id === state.selectedConversation);

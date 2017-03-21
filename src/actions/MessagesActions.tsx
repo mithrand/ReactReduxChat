@@ -5,16 +5,16 @@ import {Action} from './Action';
 
 export class MessagesActions {
 
-    public static ADD_MESSAGE = (text: string): Action => {
-        return {type: ActionType.ADD_MESSAGE, payload: {text: text}} ;
+    public static ADD_MESSAGE = (text: string, idConversation: string): Action => {
+        return {type: ActionType.ADD_MESSAGE, payload: {text: text, idConversation: idConversation}} ;
     };
 
-    public static DEL_MESSAGE = (id: string): Action => {
-        return {type: ActionType.DEL_MESSAGE, payload: {id: id}} ;
+    public static DEL_MESSAGE = (id: string, idConversation: string): Action => {
+        return {type: ActionType.DEL_MESSAGE, payload: {id: id, idConversation: idConversation}} ;
     };
 
-    public static UPDATE_MESSAGE = (id: string, text: string): Action => {
-        return {type: ActionType.UPDATE_MESSAGE, payload: {id: id , text: text}} ;
+    public static UPDATE_MESSAGE = (id: string, text: string, idConversation: string): Action => {
+        return {type: ActionType.UPDATE_MESSAGE, payload: {id: id , text: text, idConversation: idConversation}} ;
     };
 
 }

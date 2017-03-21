@@ -19,6 +19,7 @@ export class ConversationInput extends React.Component<ConversationInputProps , 
     constructor(props: ConversationInputProps) {
         super(props);
         this.props = props;
+        this.state = this.getDefaultState();
     }
 
     getDefaultState = (): ConversationInputState => {
@@ -60,6 +61,7 @@ export class ConversationInput extends React.Component<ConversationInputProps , 
                         id="exampleInputEmail2"
                         placeholder="Conversation"
                         onChange={this.onChangeInputHandler}
+                        value = {this.state.title}
                     />
                 </div>
                 <button type="submit" className="btn btn-default">Create new Conversation</button>

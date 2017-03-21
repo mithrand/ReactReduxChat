@@ -2,48 +2,45 @@
  * Created by Antonio on 18/03/2017.
  */
 
-import {State, defaultState} from '../store/State';
 import {Action} from '../actions/Action';
 import {ActionType} from '../actions/ConversationsActions';
 import {Conversation} from '../model/Conversation';
+import MessagesReducer from './Messages';
 
 // REQUIRES
 let UID = require('uuid-js');
 
-export default function conversations (state: State = defaultState(), action: Action): State {
-    let result: State = state;
+export default function conversations (state: Conversation[] = [], action: Action): Conversation[] {
+
     switch (action.type) {
         case ActionType.ADD_CONVERSATION: {
             let newConversation: Conversation = {id: UID.create().hex, title: action.payload.title, messages: []};
-            let conversations = state.conversations.concat([newConversation]);
-            result = {...state, conversations: conversations};
-            }
-            break;
+            return  state.concat([newConversation]);
+        }
         case ActionType.UPDATE_CONVERSATION: {
-                let myConversation = state.conversations.find(x => x.id === action.payload.id);
-                if (myConversation) {
-                    let newConversation = Object.assign({}, myConversation, {
-                        title: action.payload.title,
-                        messages: action.payload.messages
-                    });
-                    let conversations = state.conversations
-                        .filter(x => x.id !== action.payload.id)
-                        .concat([newConversation]);
-                    result = {...state, conversations: conversations };
-                }
+            let myConversation = state.find(x => x.id === action.payload.id);
+            if (myConversation) {
+                let newConversation = Object.assign({}, myConversation, {
+                    title: action.payload.title,
+                    messages: myConversation.messages.concat([])
+                });
+                return state.map(x => { return x.id === newConversation.id ? newConversation : x} );
+            } else {
+                return state;
             }
-            break;
-        case ActionType.SELECT_CONVERSATION: {
-                let myConversation = state.conversations.find(x => x.id === action.payload.id);
-                if (myConversation) {
-                    result = {...state, selectedConversation: myConversation.id };
-                }
+        }
+        case ActionType.ADD_MESSAGE:
+        case ActionType.DEL_MESSAGE: {
+            let conversation = state.find(x => x.id === action.payload.idConversation);
+            if (conversation) {
+                let messages = MessagesReducer(conversation.messages, action);
+                let newConversation = {...conversation, messages: messages };
+                return state.map(x => { return x.id === newConversation.id ? newConversation : x; });
+            } else {
+                return state;
             }
-            break;
+        }
         default:
-            result = state;
-            break;
+            return state;
     }
-
-    return result;
 }
