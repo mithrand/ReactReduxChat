@@ -33,13 +33,6 @@ export default function conversations (state: State = defaultState(), action: Ac
                 }
             }
             break;
-        case ActionType.SELECT_CONVERSATION: {
-                let myConversation = state.conversations.find(x => x.id === action.payload.id);
-                if (myConversation) {
-                    result = {...state, selectedConversation: myConversation.id };
-                }
-            }
-            break;
         default:
             result = state;
             break;
