@@ -3,10 +3,10 @@
  */
 
 import { combineReducers } from 'redux';
-import messages from './Messages';
 import conversations from './Conversations';
+import selectedConversation from './SelectedConversation';
 
 export default combineReducers({
-    messageReducer: messages,
-    conversationsReducer: conversations
+    conversations,
+    selectedConversation
 });
