@@ -2,6 +2,7 @@
  * Created by amunoz on 15/03/2017.
  */
 import * as React from 'react';
+import {AddForm} from './AddForm';
 
 interface MessageInputProps {
     name: string;
@@ -43,20 +44,14 @@ export class MessageInput extends React.Component<MessageInputProps , {}> {
 
     render() {
         return(
-            <form onSubmit={this.onFormSubmitHandler} >
-                <div className="form-group">
-                    <label htmlFor="message">Message:</label>
-                    <input
-                        name="text"
-                        type="text"
-                        className="form-control"
-                        placeholder="Message"
-                        onChange={this.onChangeHandler}
-                        value={this.state.text}
-                    />
-                </div>
-                <button type="submit" className="btn btn-default">Send</button>
-            </form>
+            <AddForm
+                caption="Message"
+                addButtonCaption="Add Message"
+                placeholder="Message"
+                text={this.state.text}
+                onSubmit={this.onFormSubmitHandler}
+                onChange={this.onChangeHandler}
+            />
         );
     }
 }

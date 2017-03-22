@@ -1,14 +1,15 @@
 /**
- * Created by amunoz on 21/03/2017.
+ * Created by Antonio on 18/03/2017.
  */
+
 import {Action} from '../actions/Action';
 import {ActionType} from '../actions/SelectedConversationActions';
 
-export default function selectedConversation(state: string = '', action: Action) {
+export default function selectedConversation (state: string = '', action: Action): string {
     switch (action.type) {
         case ActionType.SELECT_CONVERSATION:
-            return {id: action.payload.id};
+            return action.payload.id;
         default:
-            return  state;
+            return state;
     }
 }
