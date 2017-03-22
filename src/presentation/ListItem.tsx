@@ -31,7 +31,7 @@ export class ListItem extends React.Component< ListItemProps , {}> {
                     className="list-group-item"
                     onClick={() => {this.props.onClick(x.id)}}
                 >
-                    <h5><small>{x.timeSpam}</small>{x.text}</h5>
+                    <h5><small>{x.timeSpam}</small> {x.text}</h5>
                 </li>
             );
         });
@@ -48,4 +48,3 @@ export class ListItem extends React.Component< ListItemProps , {}> {
 }
 
 export default ListItem;
-

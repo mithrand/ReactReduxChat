@@ -3,7 +3,7 @@
  */
 
 import {Action} from '../actions/Action';
-import {ActionType} from '../actions/SelectedConversationActions';
+import {ActionType} from '../actions/ConversationsActions';
 
 export default function selectedConversation (state: string = '', action: Action): string {
     switch (action.type) {

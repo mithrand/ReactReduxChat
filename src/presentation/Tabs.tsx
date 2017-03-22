@@ -3,7 +3,7 @@
  */
 import * as React from 'react';
 
-interface Tab {
+export interface Tab {
     title: string;
     id: string;
     active: boolean;
@@ -14,7 +14,7 @@ export interface TabsProps {
     onClick(id: string): void;
 }
 
-export class Tabs extends React.Component<TabsProps ,{}> {
+export class Tabs extends React.Component<TabsProps , {}> {
 
     props: TabsProps;
 

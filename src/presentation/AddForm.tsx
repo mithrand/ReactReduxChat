@@ -5,7 +5,6 @@
 import * as React from 'react';
 
 export interface FormProps {
-    text: string;
     caption: string;
     addButtonCaption?: string;
     placeholder: string;
@@ -21,7 +20,9 @@ export class AddForm extends React.Component<FormProps, {}> {
     }
 
     onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         this.props.onSubmit(event.currentTarget.elements['text'].value); // tslint:disable:no-string-literal
+        event.currentTarget.elements['text'].value = '';
     };
 
     render() {
@@ -29,13 +30,12 @@ export class AddForm extends React.Component<FormProps, {}> {
         return (
             <form className="form-inline" onSubmit={this.onSubmitHandler}>
                 <div className="form-group">
-                    <label htmlFor="text">Conversation</label>
+                    <label htmlFor="text">{this.props.caption}</label>
                     <input
                         name="text"
                         type="text"
                         className="form-control"
                         placeholder={this.props.placeholder}
-                        value={this.props.text}
                     />
                 </div>
                 <button type="submit" className="btn btn-default">

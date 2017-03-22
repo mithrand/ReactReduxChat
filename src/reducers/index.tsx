@@ -4,7 +4,7 @@
 
 import { combineReducers } from 'redux';
 import conversations from './Conversations';
-import selectedConversation from './SelectedConversation';
+import selectedConversation from './selectedConversation';
 
 export default combineReducers({
     conversations,
