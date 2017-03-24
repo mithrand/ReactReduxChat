@@ -45,15 +45,17 @@ export class Message extends React.Component<{}, {}> {
 }
 
 const mapStateToListItem = (state: State) => {
-    return {};
+    return state;
 };
 
 // we'll return an object with an onClick property configured to dispach our onClick function
 const mapDispatchToListItem = (dispatch: Redux.Dispatch<State>) => {
-    return {};
+    return { dispatch: dispatch };
 };
 
-const mapDispatchAndStateToListItem = (state: State, dispatch: Redux.Dispatch<State>) => {
+// !OJO! Este metodo toma como entrada las salidas de los dos anteriores por eso mapDispatchToListItem devuelve
+// {dispatch:dispatch}
+const mapDispatchAndStateToListItem = (state: State, dispatch: any) => {
     const conversation = state.conversations.find(x => x.id === state.selectedConversation);
     let messages: Item[] = [];
 
@@ -64,7 +66,7 @@ const mapDispatchAndStateToListItem = (state: State, dispatch: Redux.Dispatch<St
     return {
         items: messages,
         onClick: (id: string) => {
-            dispatch(MessagesActions.DEL_MESSAGE(id, state.selectedConversation));
+            dispatch.dispatch(MessagesActions.DEL_MESSAGE(id, state.selectedConversation));
         },
     };
 
