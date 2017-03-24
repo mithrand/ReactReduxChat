@@ -11,25 +11,18 @@ export interface Item {
 
 export interface ListItemProps {
     items: Item[];
+    parentid?: string;
     onClick(id: string): void;
 }
 
-export class ListItem extends React.Component< ListItemProps , {}> {
+export const ListItem: React.StatelessComponent<ListItemProps> = (props: ListItemProps) => {
 
-    props: ListItemProps;
-
-    constructor(props: ListItemProps) {
-        super(props);
-        this.props = props;
-    }
-
-    render() {
-        const items = this.props.items.map(x => {
+        const items = props.items.map(x => {
             return (
                 <li
                     key={x.id}
                     className="list-group-item"
-                    onClick={() => {this.props.onClick(x.id)}}
+                    onClick={() => {props.onClick(x.id)}}
                 >
                     <h5><small>{x.timeSpam}</small> {x.text}</h5>
                 </li>
@@ -43,8 +36,6 @@ export class ListItem extends React.Component< ListItemProps , {}> {
                 </ul>
             </div>
         );
-    }
-
-}
+};
 
 export default ListItem;

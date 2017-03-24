@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {Message} from './containers/Message';
-import {Conversations} from './containers/Conversations';
+import {Message, MessagesList} from './containers/Message';
+import {ConversationTabs, AddConversationForm } from './containers/Conversations';
 
 class App extends React.Component<{}, {} > {
 
@@ -9,11 +9,14 @@ class App extends React.Component<{}, {} > {
 
         return (
             <div>
-                <Conversations />
+                {/* <Conversations /> */}
+                <ConversationTabs />
                 <div className="page-header">
                     <h1>MessageChat</h1>
                 </div>
+                < MessagesList />
                 <Message />
+                <AddConversationForm />
             </div>
         );
     }

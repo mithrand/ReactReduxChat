@@ -3,6 +3,8 @@
  */
 
 import * as React from 'react';
+import * as Redux from 'redux';
+import { connect } from 'react-redux';
 
 import {store} from '../store/Store';
 import {State} from '../store/State';
@@ -28,19 +30,8 @@ export class Message extends React.Component<{}, {}> {
     };
 
     render() {
-        const state: State = store.getState();
-        const conversation = state.conversations.find(x => x.id === state.selectedConversation);
-
-        let messages: Item[] = [];
-        if (conversation) {
-            messages = conversation.messages.map(m => {
-                return { id: m.id, text: m.text, timeSpam: m.timeSpam.format('HH:mm:ss')};
-            });
-        }
-
         return(
             <div>
-                <ListItem items={messages} onClick={this.deleteMessage}/>
                 <AddForm
                     caption="Message"
                     addButtonCaption="Add Message"
@@ -52,3 +43,34 @@ export class Message extends React.Component<{}, {}> {
     }
 
 }
+
+const mapStateToListItem = (state: State) => {
+    return {};
+};
+
+// we'll return an object with an onClick property configured to dispach our onClick function
+const mapDispatchToListItem = (dispatch: Redux.Dispatch<State>) => {
+    return {};
+};
+
+const mapDispatchAndStateToListItem = (state: State, dispatch: Redux.Dispatch<State>) => {
+    const conversation = state.conversations.find(x => x.id === state.selectedConversation);
+    let messages: Item[] = [];
+
+    if (conversation) {
+        messages = conversation.messages.map(m => ({id: m.id, text: m.text, timeSpam: m.timeSpam.format('HH:mm:ss')}));
+    }
+
+    return {
+        items: messages,
+        onClick: (id: string) => {
+            dispatch(MessagesActions.DEL_MESSAGE(id, state.selectedConversation));
+        },
+    };
+
+};
+
+export const MessagesList = connect(mapStateToListItem,
+                                    mapDispatchToListItem,
+                                    mapDispatchAndStateToListItem) (ListItem);
+

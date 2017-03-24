@@ -14,35 +14,26 @@ export interface TabsProps {
     onClick(id: string): void;
 }
 
-export class Tabs extends React.Component<TabsProps , {}> {
+export const Tabs: React.StatelessComponent<TabsProps> = (props: TabsProps ) => {
 
-    props: TabsProps;
+    const tabs = props.tabs.map( x =>  (
+            <li
+                key={x.id}
+                role="presentation"
+                className={x.active ? 'active' : ''}
+                onClick={() => { props.onClick(x.id)}}
+            >
+                <a href="#">{x.title}</a>
+            </li>
+        )
+    );
 
-    constructor(props: TabsProps) {
-        super(props);
-        this.props = props;
-    }
+    return (
+        <ul className="nav nav-tabs">
+        {tabs}
+        </ul>
+    );
 
-    render() {
-        const tabs = this.props.tabs.map( x => {
-            return (
-                <li
-                    key={x.id}
-                    role="presentation"
-                    className={x.active ? 'active' : ''}
-                    onClick={() => { this.props.onClick(x.id)}}
-                >
-                    <a href="#">{x.title}</a>
-                </li>
-            );
-        });
-
-        return(
-            <ul className="nav nav-tabs">
-            {tabs}
-            </ul>
-        );
-    }
-}
+};
 
 export default Tabs;
